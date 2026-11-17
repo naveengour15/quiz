@@ -1,0 +1,157 @@
+================================================================================
+                    FSRQUIZ - FULL QUIZ PLAY ENGINE DOCUMENTATION
+================================================================================
+
+1. OVERVIEW & ARCHITECTURE
+--------------------------------------------------------------------------------
+The FSRQuiz platform is a high-speed, synchronized KBC-style quiz engine.
+Users join live scheduled quizzes, wait in a synchronized waiting room, answer
+questions with a 5s HOLD window and 10s ANSWER window per question, and receive
+instant rank & score feedback on the leaderboard.
+
+
+2. DATABASE TABLES & COLUMNS USED
+--------------------------------------------------------------------------------
+
+A. Table: `quizzes`
+   - `id`                   : Primary Key (int)
+   - `tenant_id`            : Tenant Identifier (int)
+   - `title`                : Quiz Title (varchar)
+   - `scheduled_at`         : Quiz Start Timestamp (datetime)
+   - `availability_end`     : Quiz Expiry Timestamp (datetime)
+   - `complete_status`      : Status flag ('upcoming', 'started', 'completed')
+   - `no_of_points`         : Maximum achievable points/reward (int)
+   - `no_of_players`        : Number of total playing participants (int)
+
+B. Table: `quiz_questions`
+   - `id`                   : Question Primary Key (int)
+   - `quiz_id`              : Foreign Key referencing `quizzes.id` (int)
+   - `order`                : Question display sequence order (int)
+   - `question_text`        : Question text in English (text)
+   - `hindi_question`       : Question text in Hindi (text)
+   - `options`              : JSON array of available option choices (text/json)
+   - `correct_answer`       : Id or key of the correct option (varchar)
+   - `time_limit_seconds`   : Time limit per question, default 15s (int)
+   - `is_switch_question`   : Lifeline flag for switch question (boolean/tinyint)
+
+C. Table: `quiz_users` (Registration & Entry Tracking)
+   - `id`                   : Primary Key (int)
+   - `tenant_id`            : Tenant ID (int)
+   - `quiz_id`              : Quiz ID (int)
+   - `user_id`              : User ID (int)
+   - `status`               : Participation Status ('joined', 'completed')
+   - `fifty_fifty`          : 50:50 Lifeline used flag (boolean)
+   - `switch_option`        : Switch Question Lifeline used flag (boolean)
+
+D. Table: `practice_quiz_users` (Game Play Results & Leaderboard)
+   - `id`                   : Primary Key (int)
+   - `tenant_id`            : Tenant ID (int)
+   - `quiz_id`              : Quiz ID (int)
+   - `user_id`              : User ID (int)
+   - `status`               : Play status ('completed')
+   - `total_question`       : Total number of questions in quiz (int)
+   - `total_correct_answer` : Total correct answers submitted (int)
+   - `total_time`           : Total time taken across all questions in seconds (int)
+   - `per_ans_average_time` : Average response time per answer (int)
+
+E. Table: `quiz_rank_rewards` (Prize Pool Distribution)
+   - `quiz_id`              : Quiz ID (int)
+   - `start_rank`           : Start rank boundary e.g. 1 (int)
+   - `end_rank`             : End rank boundary e.g. 3 (int)
+   - `reward`               : Guaranteed coin reward for rank tier (int)
+
+F. Table: `users` (Account & Play Limits)
+   - `id`                   : User Primary Key (int)
+   - `available_quiz_limit` : Daily remaining quiz play limit (int)
+
+
+3. COMPLETE STEP-BY-STEP QUIZ FLOW LOGIC
+--------------------------------------------------------------------------------
+
+STEP 1: HOME DASHBOARD & QUIZ DISCOVERY (`today-quiz.blade.php`)
+   - Reads `$todayQuizzes` passed from `HomeController`.
+   - Filters upcoming and live quizzes up to 10 items.
+   - For each card:
+     * Checks if `scheduled_at` timestamp is past -> status set to STARTED (Red Dot).
+     * Checks `$joinedQuizIds` array -> button shows "Open Quiz" (`goToQuizOrWait`).
+     * If user limit exhausted -> button disabled with toast alert.
+     * Click on card / button opens bottom sheet modal or navigates to waiting/play.
+
+STEP 2: QUIZ JOIN SHEET & REGISTRATION (`openQuizSheet` / `goToQuizOrWait`)
+   - Triggered when user clicks "Play Now".
+   - Executes `POST /quiz/{id}/join` to register entry into `quiz_users`.
+   - Reduces `users.available_quiz_limit` by 1.
+   - If `scheduled_at` is in the future -> Redirects to `/quiz/waiting/{id}`.
+   - If `scheduled_at` is live -> Redirects to `/quiz/play/{id}`.
+
+STEP 3: SYNCHRONIZED WAITING ROOM (`QuizMasterClock`)
+   - Calculates time drift between client device clock and server clock via API.
+   - Live synchronized countdown timer runs down to `scheduled_at`.
+   - When countdown hits 00:00 -> Auto-navigates all connected players to `/quiz/play/{id}`.
+
+STEP 4: GAMEPLAY LOOP & ANSWER SELECTION (`play.blade.php`)
+   - Each question executes a 2-phase lifecycle:
+     1. HOLD Phase (5s): Renders Question text and displays "Options appearing in 5s...".
+     2. ANSWER Phase (10s): Renders options, starts circular SVG dial countdown (10s -> 0s).
+   - Answer Selection:
+     * User clicks option button.
+     * Instant audio feedback (`Sound.select()`).
+     * Selected Option Button & Parent Wrapper get `.selected` class with Bright Gold Glow (`#ffd76a`).
+     * Option buttons are disabled to prevent duplicate submissions.
+     * AJAX call `POST /quiz/{id}/submit-answer` sends selected option.
+   - Auto-Submit Timeout Logic:
+     * If 10s timer expires without selection, `autoSubmitFirstOption()` automatically highlights and submits Option A.
+
+STEP 5: RESULT COMPUTATION & LEADERBOARD (`winners.blade.php`)
+   - Upon completion of all questions:
+     * `total_correct_answer` & `total_time` are calculated.
+     * Transactionally inserted into `practice_quiz_users` table with `status = 'completed'`.
+   - Leaderboard Query:
+     * `SELECT * FROM practice_quiz_users WHERE quiz_id = ? AND status = 'completed' ORDER BY total_correct_answer DESC, total_time ASC LIMIT 50;`
+   - Top 3 rankers receive Gold Badges (#1, #2, #3) with rank rewards calculated from `quiz_rank_rewards`.
+
+
+4. LIFELINES, AUDIO & SESSION STORAGE LOGIC
+--------------------------------------------------------------------------------
+
+A. Lifeline System:
+   - 50:50 Lifeline: Hides 2 incorrect options. Updates `quiz_users.fifty_fifty = true`.
+   - Switch Question: Swaps current question with backup question where `is_switch_question = 1`. Updates `quiz_users.switch_option = true`.
+
+B. Sound Engine (`Sound` Helper):
+   - Preloaded Audio Files: `select.mp3`, `correct.mp3`, `wrong.mp3`, `clock.mp3`, `bg.mp3`.
+   - Pre-loaded on initial page load into browser cache to eliminate network traffic during play.
+
+C. Session & Local Recovery:
+   - `qx_review_{quizId}`: Caches question-by-question selection log in browser `sessionStorage`.
+   - `qx_prize_{quizId}`: Stores max point reward in `sessionStorage`.
+   - `qx_review_done_{quizId}` & `qx_winners_done_{quizId}`: Prevents page refresh loops and re-submission attempts.
+
+
+5. MULTI-TENANCY, SECURITY & PLAY LIMITS
+--------------------------------------------------------------------------------
+   - Multi-Tenancy Isolation: All queries are filtered by `tenant_id` via `getTenantId()`.
+   - Anti-Cheat Time Offsets: `QuizMasterClock` detects client device clock tampering by comparing `Date.now()` with server Unix timestamp.
+   - Daily Play Limit: Users start with a fixed daily limit (`available_quiz_limit`), which decrements on quiz join and can be replenished via survey offers.
+   - DB Transactions: Submissions use `DB::transaction()` to ensure zero partial state corruptions during high-traffic bursts.
+
+
+6. APPLICATION ROUTES & CONTROLLER MATRIX
+--------------------------------------------------------------------------------
+   - `POST /quiz/{id}/join`              -> `QuizController@join`
+   - `GET  /quiz/{id}/start`             -> `QuizController@start`
+   - `POST /quiz/{id}/get-question`      -> `QuizController@getQuestion`
+   - `POST /quiz/{id}/get-question-options` -> `QuizController@getQuestionOptions`
+   - `POST /quiz/{id}/submit-answer`     -> `QuizController@submitAnswer`
+   - `GET  /quiz/winners/{id}`           -> `QuizController@winners`
+   - `GET  /newplay/bundle/{id}`         -> `NewPlayQuizController@getQuizBundle`
+   - `POST /newplay/submit`              -> `NewPlayQuizController@submitQuiz`
+
+
+7. HIGH-CONCURRENCY OPTIMIZATION NOTES (NEWPLAY ENGINE)
+--------------------------------------------------------------------------------
+   - `NewPlayQuizController::getQuizBundle($id)` caches full questions, options, and sound URLs
+     in Redis (`Cache::remember()`) for 300s.
+   - Eliminates per-question DB read queries, reducing database load to 0 DB queries during gameplay.
+   - Submits final quiz result in 1 atomic bulk POST request at the end of gameplay.
+================================================================================

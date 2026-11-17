@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Events;
+
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+class QuizTimeSync implements ShouldBroadcast
+{
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $quizId;
+    public $server_now_ms;
+    public $scheduled_time_ms;
+
+    /**
+     * Create a new event instance.
+     */
+    public function __construct($quizId, $server_now_ms = null, $scheduled_time_ms = null)
+    {
+        $this->quizId = $quizId;
+        $this->server_now_ms = $server_now_ms ?? (int) round(microtime(true) * 1000);
+        $this->scheduled_time_ms = $scheduled_time_ms;
+    }
+
+    /**
+     * Get the channels the event should broadcast on.
+     */
+    public function broadcastOn()
+    {
+        return [
+            new Channel("quiz.{$this->quizId}"),
+            new PrivateChannel("quiz.{$this->quizId}")
+        ];
+    }
+
+    public function broadcastWith()
+    {
+        return [
+            'quizId' => $this->quizId,
+            'server_now_ms' => $this->server_now_ms,
+            'scheduled_time_ms' => $this->scheduled_time_ms,
+        ];
+    }
+}

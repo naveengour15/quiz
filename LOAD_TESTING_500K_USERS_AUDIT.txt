@@ -1,0 +1,153 @@
+================================================================================
+FSR QUIZ APP & BACKEND - 5,00,000 (5 LAC) CONCURRENT USERS LOAD TESTING AUDIT
+Date: 2026-10-27
+Target: 500,000 Concurrent Live Quiz Players
+Scope: Flutter Mobile App (FSRQuizApp) & Laravel API Backend
+Status: Audit Completed - Pending Implementation
+================================================================================
+
+1. EXECUTIVE SUMMARY & CONCURRENCY MATH
+--------------------------------------------------------------------------------
+When 5,00,000 (5 Lac) users play a live quiz at the exact same time, traffic 
+is not evenly distributed—it hits in extreme, concentrated micro-bursts:
+
+- Quiz Start (T=0s):
+  500,000 GET requests hitting the questions API in < 2 seconds.
+- Every Question (every 10-15s during gameplay):
+  500,000 POST answer submissions within a 3-5 second window.
+- Quiz End (Leaderboard Screen):
+  500,000 GET requests hitting the leaderboard API simultaneously.
+
+Without in-memory caching and queuing, standard MySQL and PHP-FPM architectures 
+will crash within the first 5 seconds.
+
+
+2. CRITICAL BOTTLENECKS IDENTIFIED
+--------------------------------------------------------------------------------
+
+[CRITICAL 1] Answer Submission MySQL Explosion (submitAnswer)
+- File: app/Http/Controllers/androidapi/QuizesController.php -> submitAnswer()
+- Problem:
+  Every single user submission synchronously executes:
+  1. Quiz::find($id)
+  2. QuizQuestion::where(...)
+  3. QuizQuestionUserAnswer::updateOrCreate(...)
+  4. ActionTrail::create(...)
+  5. QuizUser::where(...)->update(...)
+  For 500,000 users submitting within 5 seconds, this creates:
+  500,000 x 7 = 35,00,000 (3.5 Million) MySQL queries in 5 seconds!
+  This equals ~700,000 Queries Per Second (QPS).
+- Impact:
+  MySQL default max_connections is 151. MySQL will immediately exhaust its 
+  connection pool, encounter table/row locks, and cause 504 Gateway Timeouts.
+- Solution Ready in Codebase:
+  app/Services/RedisQuizService.php already has recordAnswer() which writes to
+  an in-memory Redis Pipeline (0.5ms) and queues records to PENDING_ANSWERS_QUEUE
+  for asynchronous batch background persistence to MySQL.
+
+[CRITICAL 2] Leaderboard Recalculation on Every GET Request
+- File: app/Http/Controllers/androidapi/QuizesController.php -> getQuizLeaderboard()
+- Problem:
+  Line 824 executes: QuizWinner::recalculateRanks((int) $id);
+  on EVERY single GET request.
+- Impact:
+  When 500,000 users finish the quiz and open the leaderboard screen, 
+  MySQL will attempt to recalculate the entire quiz ranking 500,000 times concurrently!
+  This will permanently freeze/deadlock the database server.
+- Solution:
+  Remove recalculateRanks from the GET endpoint. Ranks should only be calculated ONCE
+  upon quiz completion via background cron/event. Serve the Top 50 leaderboard 
+  directly from Redis ZSET (RedisQuizService::getLeaderboard) or Cache::remember 
+  with a 30-60 second TTL.
+
+[CRITICAL 3] Simultaneous Question Fetching Spike (Thundering Herd)
+- File: app/Http/Controllers/androidapi/QuizesController.php -> getQuestions()
+- Problem:
+  At quiz start time, 500,000 devices call quizes/api/questions/{id} at once.
+  Each request performs a database SELECT on QuizQuestion with Question relations.
+- Impact:
+  500,000 identical database queries hitting MySQL at the exact same second.
+- Solution:
+  Cache the questions JSON in Redis or Laravel Cache:
+  Cache::remember("fsr:quiz:{$id}:questions_payload", 600, function() ...);
+  All 500k requests will be served from RAM in sub-10ms without touching MySQL.
+
+[CRITICAL 4] Mobile App Polling & Missing Network Timeouts
+- File: FSRQuizApp/lib/services/api_service.dart & quiz screens
+- Problem:
+  1. HTTP requests in api_service.dart do not have explicit timeouts configured.
+     If the server is under heavy load, app threads may hang indefinitely.
+  2. Polling waiting room status at the exact same millisecond by 500k phones.
+- Solution:
+  1. Add strict 4-5 second timeouts (.timeout(const Duration(seconds: 4))) on 
+     real-time quiz APIs.
+  2. Keep the local offline buffer active (_saveAnswerToPrefs) so user gameplay 
+     never stops even if network latency spikes.
+  3. Introduce randomized jitter (50ms - 500ms delay) before polling calls.
+
+[CRITICAL 5] Banner View Tracking Load
+- File: app/Helpers/CommonHelper.php & routes/androidapi.php
+- Problem:
+  500,000 users opening screens fire 500,000 instant INSERT queries into ad_view_histories.
+- Solution:
+  Make banner tracking asynchronous, batched in Redis, or throttled to avoid 
+  database write saturation during live quizzes.
+
+
+3. REQUIRED CODE UPDATES ROADMAP (ACTION ITEMS)
+--------------------------------------------------------------------------------
+
+[BACKEND API UPDATES]
+[ ] 1. QuizesController.php -> submitAnswer:
+       - Check if Redis is available via RedisQuizService::isAvailable().
+       - Route submission through RedisQuizService::recordAnswer().
+       - Return instant response with points awarded.
+       - Allow background worker to sync PENDING_ANSWERS_QUEUE to MySQL in batches.
+[ ] 2. QuizesController.php -> getQuizLeaderboard:
+       - Remove QuizWinner::recalculateRanks from GET request.
+       - Use RedisQuizService::getLeaderboard() or Cache::remember(..., 30s).
+[ ] 3. QuizesController.php -> getQuestions:
+       - Wrap question fetching in Cache::remember("quiz_questions_{$id}", 600s).
+[ ] 4. QuizesController.php -> getWaitingStatus:
+       - Add 2-3 second micro-cache to absorb thundering herd requests.
+
+[FLUTTER APP UPDATES]
+[ ] 1. FSRQuizApp/lib/services/api_service.dart:
+       - Add timeout(Duration(seconds: 4)) to submitQuizAnswer, startQuiz, joinQuiz.
+[ ] 2. FSRQuizApp/lib/screens/quizes/quiz_play_screen.dart:
+       - Ensure _saveAnswerToPrefs is always called before API dispatch.
+       - Keep fallback reconciliation active at quiz end.
+[ ] 3. FSRQuizApp/lib/screens/quizes/quiz_waiting_screen.dart:
+       - Add random jitter (50ms to 400ms) to status timer polling.
+
+
+4. SERVER INFRASTRUCTURE REQUIREMENTS FOR 500,000 CONCURRENT USERS
+--------------------------------------------------------------------------------
+To sustain 5 Lac live players, code optimization must be backed by appropriate
+server infrastructure:
+
+1. Redis Server:
+   - Dedicated Redis 7.x instance with 2GB - 4GB RAM.
+   - maxmemory-policy: allkeys-lru or volatile-ttl.
+   - Persistence: RDB snapshots every 15 mins (disable heavy AOF on flash drives 
+     during live tournament).
+
+2. Web Server (Nginx):
+   - worker_processes auto;
+   - worker_connections 65535;
+   - worker_rlimit_nofile 100000;
+   - keepalive_timeout 65;
+
+3. PHP-FPM:
+   - pm = static or dynamic
+   - pm.max_children = 500 - 1000 (across load-balanced app nodes)
+   - opcache.enable = 1, opcache.validate_timestamps = 0 (production)
+
+4. MySQL Database:
+   - max_connections = 1000+
+   - innodb_buffer_pool_size = 70-80% of database server RAM.
+   - innodb_flush_log_at_trx_commit = 2 (for fast batch ingestion during tournaments).
+
+================================================================================
+END OF REPORT
+================================================================================

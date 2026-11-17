@@ -1,0 +1,2404 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #ffffff6b;
+}
+
+.page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.search-filter-box .search-field,
+.status-field,
+.visibility-field,
+.time-field {
+    width: 100% !important;
+}
+
+.category-table-box {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.category-table-wapper {
+    width: 100%;
+    min-width: 900px;
+    /* apne columns ke hisab se */
+    border-collapse: collapse;
+}
+
+.level-table-box {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.level-table-wrapper {
+    width: 100%;
+    min-width: 700px;
+}
+
+.quiz-type-table-box {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.quiz-type-table-wrapper {
+    width: 100%;
+    min-width: 700px;
+}
+
+.opt-list-grid-box {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px;
+}
+
+.search-filter-box {
+    background: var(--surface);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+}
+
+.question-search-filter-box {
+    width: 100%;
+    display: flex;
+    align-items: end;
+    gap: 10px;
+}
+
+.question-search-filter-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.input-field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-field .lbl {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-faint);
+}
+
+input,
+select {
+    width: 100%;
+}
+
+/* .question-table-box {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.question-table-wrapper {
+    width: 100%;
+    min-width: 1000px;
+     border-collapse: separate;
+    border-spacing: 0 12px;
+} */
+
+/* pagination css start  */
+.pagination-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px 16px 10px;
+    font-size: 14px;
+    color: var(--ink-faint);
+}
+
+.pagination-section nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagination-section svg {
+    width: 18px;
+    height: 18px;
+}
+
+.pagination-section .flex.gap-2.items-center.justify-between.sm\:hidden {
+    display: none;
+}
+
+.pagination-section a,
+.pagination-section [aria-current="page"] span,
+.pagination-section [aria-disabled="true"] span {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px !important;
+    border: 1px solid #e3e7ef !important;
+    background: #fff;
+    color: #4d5667 !important;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .3s;
+}
+
+/* Active Page */
+.pagination-section [aria-current="page"] span {
+    background: var(--indigo) !important;
+    color: #fff !important;
+    border-color: var(--indigo) !important;
+}
+
+/* Hover */
+.pagination-section a:hover {
+    background: var(--indigo) !important;
+    color: #fff !important;
+    border-color: var(--indigo) !important;
+    transform: translateY(-2px);
+}
+
+.pagination-section span.inline-flex.rtl\:flex-row-reverse.shadow-sm.rounded-md {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.pagination-section nav>div p {
+    display: none;
+}
+
+/* Disabled */
+.pagination-section [aria-disabled="true"] span {
+    background: #f6f7fb;
+    color: #b3b8c3 !important;
+    cursor: not-allowed;
+}
+
+.quizzes-search-filter-box {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: end;
+}
+
+.quizzes-search-filter-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+.quizzes-btnfi{
+        display: flex;
+    gap: 10px;
+
+}
+
+.quizzes-table-box {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.quizzes-table-wrapper {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+}
+
+/* voucher page css start  */
+
+.voucher-table-box {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.voucher-table-wrapper {
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: collapse;
+}
+
+/* coupons page css start  */
+
+.coupons-table-box {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.coupons-table-wrapper {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+}
+
+.quiz-winners-table-box {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.quiz-winners-table-wrapper {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+}
+
+.winner-user-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.winner-reward-detail-box {
+    display: inline;
+    gap: 6px;
+}
+
+.survey-type-table-box {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.survey-type-table-wrapper {
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: collapse;
+}
+
+.survey-test-report-table-box {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.survey-test-report-table-wrapper {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+}
+
+.survey-report-users-table-box {
+    width: 100%;
+    overflow-x: auto !important;
+}
+
+.survey-report-users-table-wrapper {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+}
+
+.ad-table-box {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.ad-table-wrapper {
+    width: 100%;
+    min-width: 1200px;
+    border-collapse: collapse;
+}
+
+.retailers-search-filter-box {
+    width: 100%;
+    display: flex;
+    align-items: end;
+    gap: 10px;
+}
+
+.retailers-search-filter-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.retailer-table-box {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.retailer-table-wrapper {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+}
+
+.retailers-filter-btn {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.retailers-filter-btn .btn {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
+
+
+.users-search-filter-box {
+    width: 100%;
+    display: flex;
+    align-items: end;
+    gap: 10px;
+}
+
+.users-search-filter-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.users-table-box {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.users-table-wrapper {
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: collapse;
+}
+
+.users-action-box {
+    display: flex;
+    gap: 10px;
+}
+
+.users-filter-btn {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.users-filter-btn .btn {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
+.audit-search-filter-box {
+    width: 100%;
+    display: flex;
+    align-items: end;
+    gap: 10px;
+}
+
+.audit-search-filter-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.audit-logs-table-box {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.audit-logs-table-wrapper {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+}
+
+.audit-filter-btn {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.audit-filter-btn .btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.transaction-search-filter-box {
+    width: 100%;
+    display: flex;
+    align-items: end;
+    gap: 10px;
+}
+
+.transaction-search-filter-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.other-quizzes-search-filter-btn {
+    display: flex;
+    gap: 10px;
+}
+
+.other-quizzes-search-filter-btn .btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.mono .d-flex .btn {
+    padding: 5px 5px;
+}
+
+.voucher-histroy-modal {
+    padding: 24px;
+}
+
+.redeem-request-search-filter-box {
+    width: 100%;
+    display: flex;
+    align-items: end;
+    gap: 10px;
+}
+
+.redeem-request-search-filter-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.redeem-request-search-filter-btn {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.redeem-request-search-filter-btn .btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.ad-analysis-view-history-table-box {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.ad-analysis-view-history-table-wrapper {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+}
+
+.ad-analysis-click-history-table-box {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.ad-analysis-click-history-table-wrapper {
+    width: 100%;
+    min-width: 950px;
+    border-collapse: collapse;
+}
+
+.setting-grid-form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.setting-grid-form-02 {
+    grid-template-columns: repeat(1, 1fr) !important;
+}
+
+/* rich text editor  */
+
+.rich-input-box {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+}
+
+.rich-input-box .field {
+    width: 100%;
+}
+
+
+.rich-text-editor {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.rich-text-editor .toolbar {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background: #f8f8f8;
+    display: flex;
+    gap: 8px;
+}
+
+.rich-text-editor .toolbar button {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.rich-text-editor .editor {
+    min-height: 150px;
+    padding: 15px;
+    outline: none;
+}
+
+.user-quiz-report-filter-box {
+    display: flex;
+    align-items: end;
+    gap: 10px;
+}
+
+
+.user-quiz-report-input {
+    width: 500px;
+}
+
+
+    .user-quiz-report-filter-btn {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+    }
+
+
+
+/* responsive css start  */
+
+@media(max-width:1199px) {
+
+    .search-filter-box .search-field,
+    .status-field,
+    .visibility-field,
+    .time-field {
+        width: 100% !important;
+    }
+}
+
+@media(max-width:991px) {
+    .table-wrap-res-01 {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+    }
+
+    .question-table-info {
+        background: transparent !important;
+        border: none !important;
+    }
+
+        .question-table-box {
+            width: 100%;
+            overflow: visible;
+        }
+
+        .question-table-wrapper {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        /* Hide table header */
+        .question-table-wrapper thead {
+            display: none;
+        }
+
+        /* Each table row becomes a card */
+        .question-table-wrapper tbody {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .question-table-wrapper tbody tr {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Every TD becomes a row inside card */
+        .question-table-wrapper tbody tr td {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px 0;
+            border: 0;
+            border-bottom: 1px solid #f0f1f3;
+            gap: 15px;
+            text-align: right;
+            box-sizing: border-box;
+        }
+
+        /* Remove border from last item */
+        .question-table-wrapper tbody tr td:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* Label */
+        .question-table-wrapper tbody tr td::before {
+            content: attr(data-label);
+            flex: 0 0 90px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b7280;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        /* Actual content */
+        .question-table-wrapper tbody tr td>* {
+            max-width: calc(100% - 145px);
+        }
+
+        /* Sr No */
+        .question-table-wrapper tbody tr td[data-label="Sr. No."] {
+            background: #f8f9ff;
+            margin: -18px -18px 10px;
+            padding: 12px 18px;
+            width: calc(100% + 36px);
+            border-radius: 12px 12px 0 0;
+        }
+
+        /* Question section */
+        .question-table-wrapper tbody tr td[data-label="Question"] {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            text-align: left;
+            padding: 12px 0;
+        }
+
+        .question-table-wrapper tbody tr td[data-label="Question"]::before {
+            flex: none;
+            margin-bottom: 8px;
+        }
+
+        .question-table-wrapper tbody tr td[data-label="Question"]>* {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        /* Question card inside TD */
+        .question-table-wrapper .q-card {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Status */
+        .question-table-wrapper td[data-label="Status"] {
+            align-items: center;
+        }
+
+        .question-table-wrapper td[data-label="Status"] select {
+            width: auto;
+            max-width: 180px;
+        }
+
+        /* Actions */
+        .question-table-wrapper td[data-label="Actions"] {
+            align-items: center;
+        }
+
+        .question-table-wrapper td[data-label="Actions"]::before {
+            align-self: center;
+        }
+
+        .question-table-wrapper td[data-label="Actions"]>div {
+            padding: 8px 0 !important;
+            display: flex !important;
+            justify-content: flex-end;
+            gap: 10px !important;
+        }
+
+        /* Badge */
+        .question-table-wrapper td[data-label="Difficulty"] {
+            align-items: center;
+        }
+
+    
+
+    /* Quizzes section css start  */
+
+    .quizzes-table-box {
+        overflow: visible;
+    }
+
+    .quizzes-table-wrapper {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: inherit;
+    }
+
+    .quizzes-table-wrapper thead {
+        display: none;
+    }
+
+    .quizzes-table-wrapper,
+    .quizzes-table-wrapper tbody,
+    .quizzes-table-wrapper tr,
+    .quizzes-table-wrapper td {
+        display: block;
+        width: 100%;
+    }
+
+    .quizzes-table-wrapper tr {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        padding: 16px;
+        margin-bottom: 18px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
+    }
+
+    .quizzes-table-wrapper td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid #f3f4f6;
+        word-break: break-word;
+    }
+
+    .quizzes-table-wrapper td:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    /* Left Label */
+
+    .quizzes-table-wrapper td::before {
+        content: attr(data-label);
+        min-width: 90px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #6b7280;
+        flex-shrink: 0;
+    }
+
+
+    /* Right Content */
+
+    .quizzes-table-wrapper td>* {
+        margin-left: auto;
+    }
+
+    .quizzes-table-wrapper td select {
+        min-width: 100px !important;
+        padding: 6px 8px;
+        font-size: 13px;
+    }
+
+    .badge {
+        font-size: 12px;
+        padding: 4px 10px;
+        border-radius: 20px;
+    }
+
+    .row-actions {
+        display: flex !important;
+        justify-content: flex-end;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .icon-btn {
+        width: 34px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .icon-btn:hover {
+        background: #f5f5f5;
+    }
+
+    .row-actions form {
+        margin: 0;
+    }
+
+    .quizzes-table-info {
+        background: transparent !important;
+        border: none !important;
+    }
+
+    /* .quiz-winners-table-box{
+        padding: 16px;
+    } */
+
+    .quiz-winners-table-wrapper {
+        min-width: 100%;
+    }
+
+    .quiz-winners-table-wrapper thead {
+        display: none;
+    }
+
+    .quiz-winners-table-wrapper,
+    .quiz-winners-table-wrapper tbody,
+    .quiz-winners-table-wrapper tr {
+        display: block;
+        width: 100%;
+    }
+
+    .quiz-winners-table-wrapper tr {
+        margin-bottom: 15px;
+        padding: 12px 15px;
+        border: 1px solid #eee;
+        background-color: #fff;
+        border-radius: 10px;
+    }
+
+    .quiz-winners-table-wrapper td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 9px 0;
+        border-bottom: 1px solid #eee;
+        gap: 10px;
+    }
+
+    .quiz-winners-table-wrapper td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #666;
+        flex-shrink: 0;
+    }
+
+    .quiz-winners-table-wrapper td:last-child {
+        border-bottom: 0;
+    }
+
+    .winner-user-box {
+        text-align: end;
+    }
+
+    .winner-reward-detail-box {
+        text-align: end;
+    }
+
+    /* voucher page responsive  */
+
+    .voucher-table-box {
+        overflow: visible;
+    }
+
+    .voucher-table-wrapper {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+
+    .voucher-table-wrapper thead {
+        display: none;
+    }
+
+    .voucher-table-wrapper tbody,
+    .voucher-table-wrapper tr {
+        display: block;
+        width: 100%;
+    }
+
+    .voucher-table-wrapper tr {
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+
+    .voucher-table-wrapper td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        box-sizing: border-box;
+    }
+
+    .voucher-table-wrapper td:last-child {
+        border-bottom: 0;
+    }
+
+    .voucher-table-wrapper td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #6b7280;
+    }
+
+    .voucher-table-wrapper td>* {
+        text-align: right;
+    }
+
+    .voucher-table-wrapper .row-actions {
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    /* coupons page responsive css start  */
+
+    .coupons-table-box {
+        overflow: visible;
+    }
+
+    .coupons-table-wrapper {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .coupons-table-wrapper thead {
+        display: none;
+    }
+
+    .coupons-table-wrapper tbody,
+    .coupons-table-wrapper tr {
+        display: block;
+        width: 100%;
+    }
+
+    .coupons-table-wrapper tr {
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        background: #FAFAFE;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+
+    .coupons-table-wrapper td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        box-sizing: border-box;
+    }
+
+    .coupons-table-wrapper td:last-child {
+        border-bottom: 0;
+    }
+
+    .coupons-table-wrapper td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #6b7280;
+    }
+
+    .coupons-table-wrapper td>* {
+        text-align: right;
+    }
+
+    .survey-type-table-box {
+        overflow-x: visible;
+    }
+
+    .survey-type-table-wrapper {
+        min-width: 0;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    /* Hide table header */
+    .survey-type-table-wrapper thead {
+        display: none;
+    }
+
+    /* Each TR becomes card */
+    .survey-type-table-wrapper tbody tr {
+        display: block;
+        width: 100%;
+        margin-bottom: 16px;
+        padding: 14px;
+        background: #fff;
+        border: 1px solid #e1e5eb;
+        border-radius: 12px;
+        box-sizing: border-box;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Each TD */
+    .survey-type-table-wrapper tbody tr td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px 0;
+        border: none;
+        box-sizing: border-box;
+        text-align: right;
+        gap: 15px;
+    }
+
+    /* Label */
+    .survey-type-table-wrapper tbody tr td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #6b7280;
+        text-align: left;
+        flex-shrink: 0;
+    }
+
+    /* Actions */
+    .survey-type-table-wrapper tbody tr td.row-actions {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-top: 14px;
+        margin-top: 6px;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .survey-type-table-wrapper tbody tr td.row-actions::before {
+        width: 100%;
+        margin-bottom: 4px;
+    }
+
+    .ad-table-box {
+        width: 100%;
+        overflow-x: visible;
+    }
+
+    .ad-table-wrapper {
+        width: 100%;
+        min-width: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    /* Table heading hide */
+    .ad-table-wrapper thead {
+        display: none;
+    }
+
+    /* Each TR = Card */
+    .ad-table-wrapper tbody tr {
+        display: block;
+        width: 100%;
+        margin-bottom: 16px;
+        padding: 14px;
+        background: #fff;
+        border: 1px solid #e1e5eb;
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+
+    /* Each TD */
+    .ad-table-wrapper tbody tr td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px 0;
+        border: none;
+        gap: 15px;
+        text-align: right;
+        box-sizing: border-box;
+        overflow-wrap: anywhere;
+    }
+
+    /* Label */
+    .ad-table-wrapper tbody tr td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #6b7280;
+        text-align: left;
+        flex-shrink: 0;
+    }
+
+    /* Status */
+    /* .ad-table-wrapper .status-change {
+        width: 150px;
+        max-width: 100%;
+    } */
+
+    /* Action */
+    .ad-table-wrapper tbody tr td.row-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 6px;
+        padding-top: 14px;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .ad-table-wrapper tbody tr td.row-actions::before {
+        width: auto;
+    }
+
+    .ad-table-wrapper .ad-action-btn {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+    }
+
+    .retailer-table-wrapper {
+        min-width: 0;
+    }
+
+    .retailer-table-wrapper thead {
+        display: none;
+    }
+
+    .retailer-table-wrapper tbody tr {
+        display: block;
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #e1e5eb;
+        border-radius: 12px;
+        background: #fff;
+    }
+
+    .retailer-table-wrapper tbody td {
+        display: flex;
+        justify-content: space-between !important;
+        gap: 15px;
+        padding: 9px 0;
+        border: 0;
+    }
+
+    .retailer-table-wrapper tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #666;
+    }
+
+    .retailer-table-wrapper .retailer-action-btn {
+        display: flex;
+        gap: 8px;
+    }
+
+    .retailers-detail-box {
+        text-align: end;
+    }
+
+    .users-table-wrapper {
+        min-width: 0;
+    }
+
+    .users-table-wrapper thead {
+        display: none;
+    }
+
+    .users-table-wrapper tbody tr {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 15px;
+        background: #fff;
+        border: 1px solid #e1e5eb;
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+
+    .users-table-wrapper tbody td {
+        display: flex;
+        justify-content: space-between !important;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+        padding: 9px 0;
+        border: 0;
+        box-sizing: border-box;
+        text-align: right;
+    }
+
+    .users-table-wrapper tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #666;
+        text-align: left;
+        flex-shrink: 0;
+    }
+
+    .users-table-wrapper .cell-user {
+        text-align: left;
+    }
+
+    .users-table-wrapper .users-action-box {
+        display: flex;
+        gap: 8px;
+    }
+
+    .audit-logs-table-wrapper {
+        min-width: 0;
+    }
+
+    .audit-logs-table-wrapper thead {
+        display: none;
+    }
+
+    .audit-logs-table-wrapper tbody tr {
+        display: block;
+        margin-bottom: 15px;
+        padding: 15px;
+        background: #fff;
+        border: 1px solid #e1e5eb;
+        border-radius: 12px;
+    }
+
+    .audit-logs-table-wrapper tbody td {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 9px 0;
+        border: 0;
+    }
+
+    .audit-logs-table-wrapper tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #666;
+    }
+
+    .audit-records {
+        text-align: end;
+    }
+
+    .transaction-search-filter-box {
+        flex-direction: column;
+    }
+
+    .admin-survey-table-box {
+        overflow-x: visible;
+    }
+
+    .admin-survey-table-wrapper {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .admin-survey-table-wrapper thead {
+        display: none;
+        /* header hide, labels data-label se aayenge */
+    }
+
+    .admin-survey-table-wrapper,
+    .admin-survey-table-wrapper tbody,
+    .admin-survey-table-wrapper tr,
+    .admin-survey-table-wrapper td {
+        display: block;
+        width: 100%;
+    }
+
+    .admin-survey-table-wrapper tr {
+        margin-bottom: 16px;
+        border: 1px solid var(--border-color, #e5e5e5);
+        border-radius: 10px;
+        padding: 10px 14px;
+        background: var(--card-bg, #fff);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .admin-survey-table-wrapper td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+        white-space: normal;
+        text-align: right;
+        border: none;
+        border-bottom: 1px solid var(--border-light, #f0f0f0);
+    }
+
+    .admin-survey-table-wrapper td:last-child {
+        border-bottom: none;
+    }
+
+    .admin-survey-table-wrapper td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        text-align: left;
+        color: var(--ink-faint, #666);
+        flex: 1;
+    }
+
+    .admin-survey-table-wrapper td[data-label="Actions"]>div,
+    .admin-survey-table-wrapper td[data-label="Status"]>div {
+        justify-content: flex-end;
+    }
+
+    /* "No surveys found" wali empty row ko card jaisa na banao */
+    .admin-survey-table-wrapper tbody tr td[colspan] {
+        display: block;
+        text-align: center;
+        border: none;
+        box-shadow: none;
+    }
+
+    .redeem-user {
+        text-align: end;
+    }
+
+    .redeem-status {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        text-align: end;
+    }
+
+    .ad-analysis-view-history-table-box {
+        width: 100%;
+        overflow: visible;
+        border: none !important;
+    }
+
+    .ad-analysis-view-history-table-wrapper {
+        width: 100%;
+        min-width: 0 !important;
+        border-collapse: separate;
+        border-spacing: 0 14px;
+    }
+
+    /* Hide table heading */
+    .ad-analysis-view-history-table-wrapper thead {
+        display: none;
+    }
+
+    /* Each TR = Card */
+    .ad-analysis-view-history-table-wrapper tbody tr {
+        display: block;
+        width: 100%;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 12px 16px;
+        margin-bottom: 14px;
+        box-sizing: border-box;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    /* TD */
+    .ad-analysis-view-history-table-wrapper tbody td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px 0;
+        border: none;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 13px;
+        line-height: 1.4;
+        text-align: right;
+        box-sizing: border-box;
+    }
+
+    /* Last row item */
+    .ad-analysis-view-history-table-wrapper tbody td:last-child {
+        border-bottom: none;
+    }
+
+    /* Labels */
+    .ad-analysis-view-history-table-wrapper tbody td::before {
+        content: attr(data-label);
+        font-size: 12px;
+        font-weight: 600;
+        color: #6b7280;
+        text-align: left;
+        flex-shrink: 0;
+        margin-right: 15px;
+    }
+
+    /* Value */
+    .ad-analysis-view-history-table-wrapper tbody td {
+        color: #1f2937;
+        font-weight: 500;
+    }
+
+    .ad-analysis-click-history-table-box {
+        width: 100%;
+        overflow: visible;
+        border: none !important;
+    }
+
+    .ad-analysis-click-history-table-wrapper {
+        width: 100%;
+        min-width: 0 !important;
+        border-collapse: separate;
+        border-spacing: 0 14px;
+    }
+
+    /* Header hide */
+    .ad-analysis-click-history-table-wrapper thead {
+        display: none;
+    }
+
+    /* Each row = Card */
+    .ad-analysis-click-history-table-wrapper tbody tr {
+        display: block;
+        width: 100%;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 12px 16px;
+        margin-bottom: 14px;
+        box-sizing: border-box;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    /* TD */
+    .ad-analysis-click-history-table-wrapper tbody td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px 0;
+        border: none;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 13px;
+        line-height: 1.4;
+        text-align: right;
+        box-sizing: border-box;
+        color: #1f2937;
+        font-weight: 500;
+        /* Long text break */
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    /* Last TD */
+    .ad-analysis-click-history-table-wrapper tbody td:last-child {
+        border-bottom: none;
+    }
+
+    /* Mobile Label */
+    .ad-analysis-click-history-table-wrapper tbody td::before {
+        content: attr(data-label);
+        font-size: 12px;
+        font-weight: 600;
+        color: #6b7280;
+        text-align: left;
+        flex-shrink: 0;
+        margin-right: 15px;
+    }
+
+    .user-quiz-report-table-box {
+        overflow: visible !important;
+    }
+
+    .user-quiz-report-table-wrapper,
+    .user-quiz-report-table-wrapper tbody {
+        display: block;
+        width: 100%;
+    }
+
+    .user-quiz-report-table-wrapper thead {
+        display: none;
+    }
+
+    .user-quiz-report-table-wrapper tr {
+        display: block;
+        margin-bottom: 12px;
+        padding: 12px 15px;
+        border: 1px solid var(--line);
+            background: #FAFAFE;
+        border-radius: 12px;
+    }
+
+    /* All rows */
+    .user-quiz-report-table-wrapper td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        padding: 9px 0;
+        border-bottom: 1px solid var(--line);
+    }
+
+    /* Labels left */
+    .user-quiz-report-table-wrapper td::before {
+        content: attr(data-label);
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ink-soft);
+    }
+
+    /* Values right */
+    .user-quiz-report-table-wrapper td > * {
+        margin-left: auto;
+        text-align: right;
+    }
+
+    /* User name proper right */
+    .user-quiz-report-table-wrapper .cell-user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-left: auto;
+    }
+
+    .user-quiz-report-table-wrapper .cell-user > div:last-child {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .user-quiz-report-table-wrapper td:last-child {
+        border-bottom: 0;
+    }
+}
+
+
+
+.top-players-table-box {
+    width: 100%;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+    .top-players-table-box {
+        overflow-x: auto;
+    }
+}
+
+
+@media (max-width:767px) {
+    .kpi-grid-02 {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .table-wrap-res-02 {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+    }
+
+    .category-table-box {
+        overflow: visible;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .category-table-wapper {
+        min-width: 100%;
+    }
+
+    .category-table-wapper thead {
+        display: none;
+    }
+
+    .category-table-wapper,
+    .category-table-wapper tbody,
+    .category-table-wapper tr,
+    .category-table-wapper td {
+        display: block;
+        width: 100%;
+    }
+
+    .category-table-wapper tr {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 15px;
+        margin-bottom: 18px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+    }
+
+    .category-table-wapper td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        padding: 10px 0;
+        border: none;
+        border-bottom: 1px solid #eee;
+        text-align: right;
+    }
+
+    .category-table-wapper td:last-child {
+        border-bottom: none;
+    }
+
+    .category-table-wapper td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #333;
+        text-align: left;
+    }
+
+    .row-actions {
+        justify-content: flex-end;
+    }
+
+    .level-table-wrapper {
+        min-width: 100%;
+    }
+
+    .level-table-wrapper thead {
+        display: none;
+    }
+
+    .level-table-wrapper,
+    .level-table-wrapper tbody,
+    .level-table-wrapper tr,
+    .level-table-wrapper td {
+        display: block;
+        width: 100%;
+    }
+
+    .level-table-wrapper tr {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        margin-bottom: 16px;
+        padding: 14px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, .08);
+    }
+
+    .level-table-wrapper td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        padding: 10px 0;
+        border-bottom: 1px solid #f1f1f1;
+        text-align: right;
+    }
+
+    .level-table-wrapper td:last-child {
+        border-bottom: none;
+    }
+
+    .level-table-wrapper td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #374151;
+        text-align: left;
+    }
+
+    .level-table-wrapper td[data-label="Status"] div {
+        justify-content: flex-end;
+    }
+
+    .level-table-box {
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .quiz-type-table-box {
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .quiz-type-table-wrapper {
+        min-width: 100%;
+    }
+
+    .quiz-type-table-wrapper thead {
+        display: none;
+    }
+
+    .quiz-type-table-wrapper,
+    .quiz-type-table-wrapper tbody,
+    .quiz-type-table-wrapper tr,
+    .quiz-type-table-wrapper td {
+        display: block;
+        width: 100%;
+    }
+
+    .quiz-type-table-wrapper tr {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        margin-bottom: 16px;
+        padding: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, .08);
+    }
+
+    .quiz-type-table-wrapper td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        text-align: right;
+    }
+
+    .quiz-type-table-wrapper td:last-child {
+        border-bottom: none;
+    }
+
+    .quiz-type-table-wrapper td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #374151;
+        text-align: left;
+    }
+
+    .quiz-type-table-wrapper td[data-label="Status"] div {
+        justify-content: flex-end;
+    }
+
+    .question-search-filter-box {
+        flex-direction: column;
+    }
+
+    .question-search-filter-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pagination-section {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .quizzes-search-filter-box {
+        flex-direction: column;
+    }
+
+    .quiz-ans-table-wrapper thead {
+        display: none;
+    }
+
+    .quiz-ans-table-wrapper,
+    .quiz-ans-table-wrapper tbody,
+    .quiz-ans-table-wrapper tr {
+        display: block;
+        width: 100%;
+    }
+
+    .quiz-ans-table-wrapper tr {
+        margin-bottom: 10px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+
+    .quiz-ans-table-wrapper td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .quiz-ans-table-wrapper td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #666;
+        flex-shrink: 0;
+    }
+
+    .quiz-ans-table-wrapper td:last-child {
+        border-bottom: 0;
+    }
+
+    .quiz-ans-table-box {
+        padding: 16px !important;
+    }
+
+    .quiz-ans-question-box {
+        text-align: end;
+    }
+
+    .transaction-search-filter-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quiz-modal-table-wrapper thead {
+        display: none;
+    }
+
+    .quiz-modal-table-wrapper tbody tr {
+        display: block;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        overflow: hidden;
+    }
+
+    .quiz-modal-table-wrapper tbody td {
+        display: flex;
+        align-items: center;
+        padding: 7px 10px !important;
+        justify-content: space-between;
+        border: 0 !important;
+        border-bottom: 1px solid #f0f0f0 !important;
+        font-size: 12px;
+        min-height: 38px;
+    }
+
+    .quiz-modal-table-wrapper tbody td::before {
+        content: attr(data-label);
+        width: 70px;
+        min-width: 70px;
+        margin-right: 6px;
+        font-size: 10px;
+        font-weight: 600;
+        color: #6b7280;
+    }
+
+    .quiz-modal-table-wrapper tbody td:last-child {
+        border-bottom: 0 !important;
+    }
+
+    .quiz-modal-table-wrapper td ol {
+        margin: 0 !important;
+        padding-left: 15px !important;
+        font-size: 11px !important;
+    }
+
+
+    .quiz-reward-table-wrapper thead {
+        display: none;
+    }
+
+    .quiz-reward-table-wrapper tbody tr {
+        display: block;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 12px;
+    }
+
+    .quiz-reward-table-wrapper tbody td {
+        display: flex;
+        align-items: center;
+        padding: 8px 10px !important;
+        border: 0 !important;
+        justify-content: space-between;
+        border-bottom: 1px solid #f0f0f0 !important;
+        font-size: 12px;
+        min-height: 38px;
+    }
+
+    .quiz-reward-table-wrapper tbody td::before {
+        content: attr(data-label);
+        width: 90px;
+        min-width: 90px;
+        margin-right: 6px;
+        font-size: 10px;
+        font-weight: 600;
+        color: #6b7280;
+    }
+
+    .quiz-reward-table-wrapper tbody td:last-child {
+        border-bottom: 0 !important;
+    }
+
+    .setting-grid-form {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* top players table box css start */
+
+    /* Outer box */
+    .top-players-table-box {
+        overflow: visible !important;
+        width: 100%;
+    }
+
+    /* Table normal table nahi rahega */
+    .op-players-table-wrapper {
+        display: block;
+        width: 100%;
+    }
+
+    /* Header hide */
+    .op-players-table-wrapper thead {
+        display: none;
+    }
+
+    /* Scroll area */
+    .op-players-table-wrapper tbody {
+        display: block;
+        width: 100%;
+        max-height: 500px;
+        overflow-y: auto;
+        padding-right: 4px;
+    }
+
+    /* Each row = Card */
+    .op-players-table-wrapper tr {
+        display: block;
+        width: 100%;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 10px 0px;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+    }
+
+    /* Each data row */
+    .op-players-table-wrapper td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        width: 100%;
+        padding: 9px 0;
+        border-bottom: 1px solid var(--line);
+        box-sizing: border-box;
+        text-align: right;
+    }
+
+    /* Last row border remove */
+    .op-players-table-wrapper td:last-child {
+        border-bottom: none;
+    }
+
+    /* Label */
+    .op-players-table-wrapper td::before {
+        content: attr(data-label);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--ink-soft);
+        text-align: left;
+        flex: 1;
+    }
+
+    /* Value */
+    .op-players-table-wrapper td>* {
+        text-align: right;
+    }
+
+    /* Username special */
+    .op-players-table-wrapper td[data-label="User Name"] {
+        padding-top: 4px;
+    }
+
+    .op-players-table-wrapper td[data-label="User Name"] strong {
+        color: var(--ink);
+        font-size: 14px;
+    }
+
+    /* Scrollbar */
+    .op-players-table-wrapper tbody::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .op-players-table-wrapper tbody::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+    }
+
+    /* top players table box css end */
+
+
+    /* Outer box */
+    div.winner-test-table-box {
+        width: 100%;
+        overflow: visible !important;
+    }
+
+    /* Table */
+    .winner-test-table-wrapper {
+        display: block;
+        width: 100%;
+    }
+
+    /* Header hide */
+    .winner-test-table-wrapper thead {
+        display: none;
+    }
+
+    /* Scrollable area */
+    .winner-test-table-wrapper tbody {
+        display: block;
+        width: 100%;
+        max-height: 500px;
+        overflow-y: auto;
+        padding-right: 5px;
+    }
+
+    /* Each row becomes card */
+    .winner-test-table-wrapper tbody tr {
+        display: block;
+        width: 100%;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 10px 14px;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+    }
+
+    /* Each cell */
+    .winner-test-table-wrapper tbody td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        width: 100%;
+        padding: 9px 0;
+        border-bottom: 1px solid var(--line);
+        box-sizing: border-box;
+    }
+
+    .winner-test-table-wrapper tbody td:last-child {
+        border-bottom: none;
+    }
+
+    /* Labels */
+    .winner-test-table-wrapper tbody td::before {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--ink-soft);
+    }
+
+    .winner-test-table-wrapper tbody td:nth-child(1)::before {
+        content: "Rank";
+    }
+
+    .winner-test-table-wrapper tbody td:nth-child(2)::before {
+        content: "Player";
+    }
+
+    .winner-test-table-wrapper tbody td:nth-child(3)::before {
+        content: "Score";
+    }
+
+    .winner-test-table-wrapper tbody td:nth-child(4)::before {
+        content: "Time";
+    }
+
+    .winner-test-table-wrapper tbody td:nth-child(5)::before {
+        content: "Reward";
+    }
+
+    /* Scrollbar */
+    .winner-test-table-wrapper tbody::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .winner-test-table-wrapper tbody::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+    }
+
+    .user-quiz-report-input {
+        width: 250px;
+    }
+}
+
+@media(max-width:575px) {
+    .kpi-grid-02 {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .question-table-box {
+        overflow-x: hidden;
+    }
+
+    .form-grid-02 {
+        grid-template-columns: 1fr !important;
+    }
+
+    .field.full {
+        grid-column: 1 !important;
+    }
+
+    .page-head {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 10px;
+    }
+
+    .opt-list-grid-box {
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+
+    .question-search-filter-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .pagination-section a,
+    .pagination-section [aria-current="page"] span,
+    .pagination-section [aria-disabled="true"] span {
+        width: 30px;
+        height: 30px;
+        font-size: 10px;
+    }
+
+    .pagination-section span.inline-flex.rtl\:flex-row-reverse.shadow-sm.rounded-md {
+        gap: 5px;
+    }
+
+    .quizzes-search-filter-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .quizzes-search-filter-btn {
+        width: 100%;
+    }
+
+    .quizzes-search-filter-btn .btn {
+        width: 100%;
+    }
+
+    .custom-tab-content {
+        padding: 20px;
+    }
+
+    .survey-test-report-table-box {
+        overflow-x: visible;
+    }
+
+    .survey-test-report-table-wrapper {
+        width: 100%;
+        min-width: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    /* Header hide */
+    .survey-test-report-table-wrapper thead {
+        display: none;
+    }
+
+    /* Each row = card */
+    .survey-test-report-table-wrapper tbody tr {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 14px;
+        background: #fff;
+        border: 1px solid #e1e5eb;
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+
+    /* Cells */
+    .survey-test-report-table-wrapper tbody tr td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px 0;
+        border: none;
+        gap: 15px;
+        box-sizing: border-box;
+    }
+
+    /* Label */
+    .survey-test-report-table-wrapper tbody tr td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #6b7280;
+        text-align: left;
+    }
+
+    .survey-report-users-table-box {
+        overflow-x: visible !important;
+        max-height: none !important;
+    }
+
+    .survey-report-users-table-wrapper {
+        width: 100%;
+        min-width: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .survey-report-users-table-wrapper thead {
+        display: none;
+    }
+
+    .survey-report-users-table-wrapper tbody tr {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 14px;
+        background: #fff;
+        border: 1px solid #e1e5eb;
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+
+    .survey-report-users-table-wrapper tbody tr td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 10px 0;
+        border: none;
+        gap: 15px;
+        box-sizing: border-box;
+    }
+
+    .survey-report-users-table-wrapper tbody tr td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #6b7280;
+        flex-shrink: 0;
+    }
+
+    .retailers-search-filter-box {
+        flex-direction: column;
+    }
+
+    .retailers-search-filter-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .users-search-filter-box {
+        flex-direction: column;
+    }
+
+    .users-search-filter-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .audit-search-filter-box {
+        flex-direction: column;
+    }
+
+    .audit-search-filter-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .transaction-search-filter-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .quiz-modal-tabs-02 {
+        flex-wrap: wrap;
+    }
+
+    .quiz-modal-body-02 {
+        padding: 10px !important;
+    }
+
+    .retailers-filter-btn .btn {
+        width: 100%;
+    }
+
+    .other-quizzes-search-filter-btn {
+        width: 100%;
+    }
+
+    .voucher-histroy-modal {
+        padding: 24px;
+    }
+
+    .quiz-modal-header {
+        padding: 16px 16px !important;
+    }
+
+    .redeem-request-search-filter-box {
+        flex-direction: column;
+    }
+
+    .redeem-request-search-filter-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .setting-grid-form {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .user-quiz-report-filter-wrapper{
+        width: 100%;
+    }
+    .user-quiz-report-filter-box {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .user-quiz-report-input {
+        width: 100%;
+    }
+
+    .user-quiz-report-filter-btn{
+        width: 100%;
+    }
+
+    .user-quiz-report-filter-btn .btn{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+
+    .op-players-table-wrapper tr {
+        border-radius: 12px;
+    }
+
+    .op-players-table-wrapper td {
+        font-size: 12px;
+        gap: 10px;
+        padding: 8px 0;
+    }
+
+    .op-players-table-wrapper td::before {
+        font-size: 11px;
+    }
+
+    .winner-test-table-wrapper tbody {
+        max-height: 450px;
+    }
+
+    .winner-test-table-wrapper tbody tr {
+        padding: 8px 12px;
+        border-radius: 12px;
+    }
+
+    .winner-test-table-wrapper tbody td {
+        padding: 8px 0;
+        font-size: 12px;
+    }
+
+    .winner-test-table-wrapper tbody td::before {
+        font-size: 11px;
+    }
+}

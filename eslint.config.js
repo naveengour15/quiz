@@ -1,0 +1,65 @@
+import js from "@eslint/js";
+
+export default [
+    js.configs.recommended,
+    {
+        languageOptions: {
+            ecmaVersion: "latest",
+            sourceType: "module",
+            globals: {
+                window: "readonly",
+                document: "readonly",
+                console: "readonly",
+                process: "readonly",
+                require: "readonly",
+                module: "readonly",
+                setTimeout: "readonly",
+                clearTimeout: "readonly",
+                setInterval: "readonly",
+                clearInterval: "readonly",
+                localStorage: "readonly",
+                sessionStorage: "readonly",
+                fetch: "readonly",
+                Audio: "readonly",
+                navigator: "readonly",
+                location: "readonly",
+                history: "readonly",
+                importScripts: "readonly",
+                firebase: "readonly",
+                self: "readonly",
+                Echo: "writable",
+                Pusher: "writable",
+                $: "readonly",
+                jQuery: "readonly",
+                // Service worker global
+                clients: "readonly",
+                // Global view helper functions injected by Blade templates
+                el: "readonly",
+                qs: "readonly",
+                qsa: "readonly",
+                api: "readonly",
+                unwrap: "readonly",
+                pick: "readonly",
+                navigate: "readonly",
+                toast: "readonly",
+                escapeHtml: "readonly",
+                withLoader: "readonly",
+            },
+        },
+        rules: {
+            "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+            "no-console": "off",
+            "no-empty": "warn",
+            "no-undef": "error",
+        },
+    },
+    {
+        ignores: [
+            "public/build/**",
+            "public/fsrapp/js/tailwindcss.js",
+            "node_modules/**",
+            "vendor/**",
+            "storage/**",
+        ],
+    },
+];

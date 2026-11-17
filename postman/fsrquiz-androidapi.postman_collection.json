@@ -1,0 +1,125 @@
+{
+  "info": {
+    "_postman_id": "fsrquiz-androidapi-2026",
+    "name": "FSRQuiz Android API",
+    "description": "Postman collection for the Android API and legacy fsrapp endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8000" },
+    { "key": "token", "value": "" },
+    { "key": "user_id", "value": "1" },
+    { "key": "quiz_id", "value": "1" },
+    { "key": "question_id", "value": "1" },
+    { "key": "survey_id", "value": "1" },
+    { "key": "announcement_id", "value": "1" },
+    { "key": "redemption_id", "value": "1" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{token}}", "type": "string" }
+    ]
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        { "name": "Send OTP", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"mobile\": \"9999999999\"\n}" }, "url": "{{base_url}}/androidapi/auth/send-otp" } },
+        { "name": "Verify OTP", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"mobile\": \"9999999999\",\n  \"otp\": \"123456\"\n}" }, "url": "{{base_url}}/androidapi/auth/verify-otp" } },
+        { "name": "Resend OTP", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"mobile\": \"9999999999\"\n}" }, "url": "{{base_url}}/androidapi/auth/resend-otp" } },
+        { "name": "Signup", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Test User\",\n  \"mobile\": \"9999999999\",\n  \"email\": \"test@example.com\"\n}" }, "url": "{{base_url}}/androidapi/auth/signup" } },
+        { "name": "Complete Profile", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Test User\",\n  \"referral_code\": \"SANDE687\",\n  \"language\": \"en\",\n  \"state\": \"1\",\n  \"city\": \"Delhi\",\n  \"dob\": \"2000-01-01\",\n  \"gender\": \"male\",\n  \"email\": \"test@example.com\"\n}" }, "url": "{{base_url}}/androidapi/auth/complete-profile" } },
+        { "name": "Get Profile", "request": { "method": "GET", "url": "{{base_url}}/androidapi/auth/profile" } },
+        { "name": "Logout", "request": { "method": "POST", "url": "{{base_url}}/androidapi/auth/logout" } }
+      ]
+    },
+    {
+      "name": "Home and Catalog",
+      "item": [
+        { "name": "Home", "request": { "method": "GET", "url": "{{base_url}}/androidapi/home" } },
+        { "name": "Categories", "request": { "method": "GET", "url": "{{base_url}}/androidapi/categories" } },
+        { "name": "Home Banners", "request": { "method": "GET", "url": "{{base_url}}/androidapi/home/banners" } },
+        { "name": "Dashboard", "request": { "method": "GET", "url": "{{base_url}}/androidapi/user/dashboard" } },
+        { "name": "Quiz List", "request": { "method": "GET", "url": "{{base_url}}/androidapi/quiz/list" } },
+        { "name": "Upcoming Quizzes", "request": { "method": "GET", "url": "{{base_url}}/androidapi/quiz/upcoming" } },
+        { "name": "Practice Quiz List", "request": { "method": "GET", "url": "{{base_url}}/androidapi/practice-quiz/list" } },
+        { "name": "Global Leaderboard", "request": { "method": "GET", "url": "{{base_url}}/androidapi/leaderboard" } }
+      ]
+    },
+    {
+      "name": "Quiz Gameplay",
+      "item": [
+        { "name": "Quiz Details", "request": { "method": "GET", "url": "{{base_url}}/androidapi/quiz/{{quiz_id}}" } },
+        { "name": "Join Quiz", "request": { "method": "POST", "url": "{{base_url}}/androidapi/quiz/{{quiz_id}}/join" } },
+        { "name": "Start Quiz", "request": { "method": "GET", "url": "{{base_url}}/androidapi/quiz/{{quiz_id}}/start" } },
+        { "name": "Get Question", "request": { "method": "POST", "url": "{{base_url}}/androidapi/quiz/{{quiz_id}}/get-question" } },
+        { "name": "Get Question Options", "request": { "method": "POST", "url": "{{base_url}}/androidapi/quiz/{{quiz_id}}/get-question-options" } },
+        { "name": "Submit Answer", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"question_id\": \"{{question_id}}\",\n  \"answer\": \"A\"\n}" }, "url": "{{base_url}}/androidapi/quiz/{{quiz_id}}/submit-answer" } },
+        { "name": "Winners", "request": { "method": "GET", "url": "{{base_url}}/androidapi/quiz/{{quiz_id}}/winners" } },
+        { "name": "Leave Quiz", "request": { "method": "POST", "url": "{{base_url}}/androidapi/quiz/{{quiz_id}}/leave" } },
+        { "name": "My Result", "request": { "method": "GET", "url": "{{base_url}}/androidapi/quiz/{{quiz_id}}/my-result" } },
+        { "name": "Quiz Status", "request": { "method": "GET", "url": "{{base_url}}/androidapi/quiz/{{quiz_id}}/status" } },
+        { "name": "Quiz Leaderboard", "request": { "method": "GET", "url": "{{base_url}}/androidapi/quizzes/{{quiz_id}}/leaderboard" } },
+        { "name": "Answer Sheet", "request": { "method": "GET", "url": "{{base_url}}/androidapi/quiz/{{quiz_id}}/answer-sheet" } },
+        { "name": "Use Lifeline", "request": { "method": "POST", "body": { "mode": "raw", "raw": "{\n  \"lifeline\": \"fifty_fifty\"\n}" }, "url": "{{base_url}}/androidapi/quiz/{{quiz_id}}/use-lifeline" } },
+        { "name": "Sounds", "request": { "method": "GET", "url": "{{base_url}}/androidapi/quizes/api/sounds" } }
+      ]
+    },
+    {
+      "name": "Practice Quiz",
+      "item": [
+        { "name": "Practice Detail", "request": { "method": "GET", "url": "{{base_url}}/androidapi/practice-quiz/{{quiz_id}}/detail" } },
+        { "name": "Practice Start", "request": { "method": "GET", "url": "{{base_url}}/androidapi/practice-quiz/{{quiz_id}}/start" } },
+        { "name": "Practice Question", "request": { "method": "POST", "url": "{{base_url}}/androidapi/practice-quiz/{{quiz_id}}/get-question" } },
+        { "name": "Practice Submit", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"question_id\": \"{{question_id}}\",\n  \"answer\": \"A\"\n}" }, "url": "{{base_url}}/androidapi/practice-quiz/{{quiz_id}}/submit-answer" } },
+        { "name": "Practice Lifeline", "request": { "method": "POST", "url": "{{base_url}}/androidapi/practice-quiz/{{quiz_id}}/use-lifeline" } },
+        { "name": "Practice Result", "request": { "method": "GET", "url": "{{base_url}}/androidapi/practice-quiz/{{quiz_id}}/my-result" } },
+        { "name": "Practice Answer Sheet", "request": { "method": "GET", "url": "{{base_url}}/androidapi/practice-quiz/{{quiz_id}}/answer-sheet" } }
+      ]
+    },
+    {
+      "name": "Wallet and Referral",
+      "item": [
+        { "name": "Wallet", "request": { "method": "GET", "url": "{{base_url}}/androidapi/user/wallet" } },
+        { "name": "Wallet History", "request": { "method": "GET", "url": "{{base_url}}/androidapi/user/wallet-history" } },
+        { "name": "Rewards", "request": { "method": "GET", "url": "{{base_url}}/androidapi/user/rewards" } },
+        { "name": "Redemptions", "request": { "method": "GET", "url": "{{base_url}}/androidapi/user/redemptions" } },
+        { "name": "Redeem Reward", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"redemption_id\": \"{{redemption_id}}\"\n}" }, "url": "{{base_url}}/androidapi/user/redeem" } },
+        { "name": "Referral Code", "request": { "method": "GET", "url": "{{base_url}}/androidapi/user/referral-code" } },
+        { "name": "Referrals", "request": { "method": "GET", "url": "{{base_url}}/androidapi/user/referrals" } },
+        { "name": "Apply Referral", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"referral_code\": \"ABC123\"\n}" }, "url": "{{base_url}}/androidapi/user/apply-referral" } }
+      ]
+    },
+    {
+      "name": "Profile, History and Survey",
+      "item": [
+        { "name": "User Profile", "request": { "method": "GET", "url": "{{base_url}}/androidapi/user/profile" } },
+        { "name": "Update Profile", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Updated User\",\n  \"email\": \"updated@example.com\"\n}" }, "url": "{{base_url}}/androidapi/user/update-profile" } },
+        { "name": "Update Language", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"language\": \"en\"\n}" }, "url": "{{base_url}}/androidapi/profile/update-language" } },
+        { "name": "Cities", "request": { "method": "GET", "url": "{{base_url}}/androidapi/profile/cities" } },
+        { "name": "Quiz History", "request": { "method": "GET", "url": "{{base_url}}/androidapi/user/quiz-history" } },
+        { "name": "History Leaderboard", "request": { "method": "GET", "url": "{{base_url}}/androidapi/history/quiz/{{quiz_id}}/leaderboard" } },
+        { "name": "Surveys", "request": { "method": "GET", "url": "{{base_url}}/androidapi/survey" } },
+        { "name": "Play Survey", "request": { "method": "GET", "url": "{{base_url}}/androidapi/survey/{{survey_id}}/play" } },
+        { "name": "Submit Survey", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"answer\": \"1\"\n}" }, "url": "{{base_url}}/androidapi/survey/{{survey_id}}/submit" } },
+        { "name": "Delete Account", "request": { "method": "DELETE", "url": "{{base_url}}/androidapi/user/delete-account" } }
+      ]
+    },
+    {
+      "name": "Legacy fsrapp Aliases",
+      "item": [
+        { "name": "Legacy Last Quiz Status", "request": { "method": "GET", "url": "{{base_url}}/fsrapp/home/last-quiz-status" } },
+        { "name": "Legacy Questions", "request": { "method": "GET", "url": "{{base_url}}/fsrapp/quizes/api/questions/{{quiz_id}}" } },
+        { "name": "Legacy Status", "request": { "method": "GET", "url": "{{base_url}}/fsrapp/quizes/api/status/{{quiz_id}}" } },
+        { "name": "Legacy Submit Answer", "request": { "method": "POST", "url": "{{base_url}}/fsrapp/quizes/api/submit-answer/{{quiz_id}}" } },
+        { "name": "Legacy Answer Sheet", "request": { "method": "GET", "url": "{{base_url}}/fsrapp/quizes/api/answer-sheet/{{quiz_id}}" } },
+        { "name": "Legacy Leaderboard", "request": { "method": "GET", "url": "{{base_url}}/fsrapp/quizes/api/leaderboard/{{quiz_id}}" } },
+        { "name": "Legacy Sounds", "request": { "method": "GET", "url": "{{base_url}}/fsrapp/quizes/api/sounds" } },
+        { "name": "Legacy Clear Session", "request": { "method": "POST", "url": "{{base_url}}/fsrapp/quizes/api/clear-session/{{quiz_id}}" } },
+        { "name": "Legacy Process Result", "request": { "method": "POST", "url": "{{base_url}}/fsrapp/quizes/api/process-result/{{quiz_id}}" } },
+        { "name": "Legacy Winners", "request": { "method": "GET", "url": "{{base_url}}/fsrapp/quiz/get-winners/{{quiz_id}}" } }
+      ]
+    }
+  ]
+}

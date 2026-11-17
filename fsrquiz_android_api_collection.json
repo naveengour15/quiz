@@ -1,0 +1,282 @@
+{
+    "info": {
+        "_postman_id": "a9d8213e-f823-4e89-8d7d-92d9f13e11aa",
+        "name": "FSRQuiz Android API Collection",
+        "description": "Complete Android Auth, Profile, Home, Quizzes, Gameplay, Leaderboard, Wallet, Referral, History & Survey API Collection for FSRQuiz platform.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "https://fsrquizapp.chaloonline.in/androidapi",
+            "type": "string"
+        },
+        {
+            "key": "token",
+            "value": "",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "1. Send OTP",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Content-Type", "value": "application/json" }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"mobile\": \"9876543210\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/auth/send-otp",
+                    "host": ["{{base_url}}"],
+                    "path": ["auth", "send-otp"]
+                },
+                "description": "Generate and send 4-digit OTP via WhatsApp to mobile number."
+            }
+        },
+        {
+            "name": "2. Verify OTP",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Content-Type", "value": "application/json" }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"mobile\": \"9876543210\",\n    \"otp\": \"1234\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/auth/verify-otp",
+                    "host": ["{{base_url}}"],
+                    "path": ["auth", "verify-otp"]
+                },
+                "description": "Verify 4-digit OTP and obtain bearer session token."
+            }
+        },
+        {
+            "name": "3. Home Dashboard Data",
+            "request": {
+                "method": "GET",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Authorization", "value": "Bearer {{token}}" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/home",
+                    "host": ["{{base_url}}"],
+                    "path": ["home"]
+                },
+                "description": "Fetch user profile stats, 6-card dashboard metrics, announcements, categories, today quizzes, mega tournaments & top 3 podium."
+            }
+        },
+        {
+            "name": "4. Quizzes Directory & Search",
+            "request": {
+                "method": "GET",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Authorization", "value": "Bearer {{token}}" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/quizzes?category_id=&search=",
+                    "host": ["{{base_url}}"],
+                    "path": ["quizzes"]
+                },
+                "description": "Fetch list of active quizzes with category filtering and search query."
+            }
+        },
+        {
+            "name": "5. Global Leaderboard",
+            "request": {
+                "method": "GET",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Authorization", "value": "Bearer {{token}}" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/leaderboard?rank_filter=top50",
+                    "host": ["{{base_url}}"],
+                    "path": ["leaderboard"]
+                },
+                "description": "Fetch global rankings, top 3 podium players, user rank & stats."
+            }
+        },
+        {
+            "name": "6. User Profile Data",
+            "request": {
+                "method": "GET",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Authorization", "value": "Bearer {{token}}" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/profile",
+                    "host": ["{{base_url}}"],
+                    "path": ["profile"]
+                },
+                "description": "Fetch complete user profile details, state list, and profile photo S3 URL."
+            }
+        },
+        {
+            "name": "7. Update Profile & Photo",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Authorization", "value": "Bearer {{token}}" }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"name\": \"John Doe\",\n    \"city\": \"Jaipur\",\n    \"state\": \"Rajasthan\",\n    \"gender\": \"male\",\n    \"language\": \"en\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/profile/update",
+                    "host": ["{{base_url}}"],
+                    "path": ["profile", "update"]
+                },
+                "description": "Update user details, address, preferences and upload WebP profile picture."
+            }
+        },
+        {
+            "name": "8. Quiz Join & Waiting Room",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Authorization", "value": "Bearer {{token}}" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/quizzes/1/join",
+                    "host": ["{{base_url}}"],
+                    "path": ["quizzes", "1", "join"]
+                },
+                "description": "Join quiz tournament and register user participation."
+            }
+        },
+        {
+            "name": "9. Fetch Quiz Questions",
+            "request": {
+                "method": "GET",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Authorization", "value": "Bearer {{token}}" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/quizzes/1/questions",
+                    "host": ["{{base_url}}"],
+                    "path": ["quizzes", "1", "questions"]
+                },
+                "description": "Fetch synchronous question set & 4 option choices for live game."
+            }
+        },
+        {
+            "name": "10. Submit Quiz Option Answer",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Authorization", "value": "Bearer {{token}}" }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"question_id\": 101,\n    \"option_id\": 402,\n    \"time_taken\": 3.5\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/quizzes/1/submit-answer",
+                    "host": ["{{base_url}}"],
+                    "path": ["quizzes", "1", "submit-answer"]
+                },
+                "description": "Submit option for question with instant validation, correct answer check and score increment."
+            }
+        },
+        {
+            "name": "11. Wallet Balance & Transaction History",
+            "request": {
+                "method": "GET",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Authorization", "value": "Bearer {{token}}" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/wallet",
+                    "host": ["{{base_url}}"],
+                    "path": ["wallet"]
+                },
+                "description": "Fetch wallet coin balance and credit/debit history."
+            }
+        },
+        {
+            "name": "12. Submit Redeem Request",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Authorization", "value": "Bearer {{token}}" }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"type\": \"mobile\",\n    \"amount\": 250,\n    \"mobile\": \"9876543210\",\n    \"company\": \"Jio\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/wallet/submit-redeem",
+                    "host": ["{{base_url}}"],
+                    "path": ["wallet", "submit-redeem"]
+                },
+                "description": "Submit Mobile Recharge or Electricity Bill redeem request with minimum 250 points validation."
+            }
+        },
+        {
+            "name": "13. Refer & Earn Info",
+            "request": {
+                "method": "GET",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Authorization", "value": "Bearer {{token}}" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/referral",
+                    "host": ["{{base_url}}"],
+                    "path": ["referral"]
+                },
+                "description": "Fetch referral code, share text and list of referred users."
+            }
+        },
+        {
+            "name": "14. Quiz Play History",
+            "request": {
+                "method": "GET",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Authorization", "value": "Bearer {{token}}" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/history",
+                    "host": ["{{base_url}}"],
+                    "path": ["history"]
+                },
+                "description": "Fetch history timeline of played quizzes and user achievements."
+            }
+        },
+        {
+            "name": "15. Surveys & Offerwall",
+            "request": {
+                "method": "GET",
+                "header": [
+                    { "key": "Accept", "value": "application/json" },
+                    { "key": "Authorization", "value": "Bearer {{token}}" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/survey",
+                    "host": ["{{base_url}}"],
+                    "path": ["survey"]
+                },
+                "description": "Fetch available surveys, completed survey count, and total reward points earned."
+            }
+        }
+    ]
+}
